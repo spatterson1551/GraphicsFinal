@@ -1,0 +1,12 @@
+20 20 2
+
+chair
+1 1
+0
+1 1 1
+
+mesh
+extrusion1.dat 0
+2 2
+90
+1 1 1
