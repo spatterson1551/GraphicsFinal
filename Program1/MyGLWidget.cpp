@@ -39,8 +39,8 @@ void MyGLWidget::initializeGL() {
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	shaderProgram = glCreateProgram();
 
-	const char* vertexSource = textFileRead("lambert.vert");
-	const char* fragmentSource = textFileRead("lambert.frag");
+	const char* vertexSource = textFileRead("blinnphong.vert"); //blinnphong.vert
+	const char* fragmentSource = textFileRead("blinnphong.frag");//blinnphong.frag
 	glShaderSource(vertexShader, 1, &vertexSource, 0);
 	glShaderSource(fragmentShader, 1, &fragmentSource, 0);
 	glCompileShader(vertexShader);
@@ -60,6 +60,7 @@ void MyGLWidget::initializeGL() {
 	u_modelLocation = glGetUniformLocation(shaderProgram, "u_modelMatrix");
 	u_lightLocation = glGetUniformLocation(shaderProgram, "u_lightPos");
 	u_colorLocation = glGetUniformLocation(shaderProgram, "u_color");
+	u_cameraPosition = glGetAttribLocation(shaderProgram, "u_camPos");
 
 
 	glUseProgram(shaderProgram);
@@ -110,6 +111,7 @@ void MyGLWidget::paintGL() {
 	
 	glm::vec4 temp = camera * light;
 	glUniform4fv(u_lightLocation, 1, &temp[0]);
+	glUniformMatrix4fv(u_cameraPosition, 1, GL_FALSE, &camera[0][0]); //Added for Blinn-Phong shading
 	
 	sceneGraph->traverse(camera, u_modelLocation, u_colorLocation);
 

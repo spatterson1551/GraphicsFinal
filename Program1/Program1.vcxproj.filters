@@ -158,5 +158,11 @@
     <None Include="lambert.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="blinnphong.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="blinnphong.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

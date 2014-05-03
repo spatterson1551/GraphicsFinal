@@ -53,6 +53,7 @@ private:
 	unsigned int u_modelLocation;
 	unsigned int u_lightLocation;
 	unsigned int u_colorLocation;
+	unsigned int u_cameraPosition;
 	glm::vec4 upVec;
 	glm::vec4 position;
 	glm::vec3 referencePt;

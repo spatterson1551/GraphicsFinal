@@ -171,6 +171,8 @@
     <ResourceCompile Include="Program1.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="blinnphong.frag" />
+    <None Include="blinnphong.vert" />
     <None Include="lambert.frag" />
     <None Include="lambert.vert" />
   </ItemGroup>
