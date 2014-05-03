@@ -264,7 +264,7 @@ void MyGLWidget::sgConfigFile() {
 	sceneGraph = new SceneGraph(width, depth);
 	sceneGraph->width = width;
 	sceneGraph->depth = depth;
-	sceneGraph->geom = new Floor(width, depth);
+	sceneGraph->geom = new Floor(width, depth, vLocation_position, vLocation_norm);
 	sceneGraph->transX = 0.0f;
 	sceneGraph->transY = 0.0f;
 	sceneGraph->transZ = 0.0f;
@@ -301,11 +301,11 @@ void MyGLWidget::sgConfigFile() {
 			fin >> sg->scaleY;
 			fin >> sg->scaleZ;
 			if (name == "chair") {
-				sg->geom = new Chair;
+				sg->geom = new Chair(vLocation_position, vLocation_norm);
 			} else if (name == "box") {
-				sg->geom = new Box;
+				sg->geom = new Box(vLocation_position, vLocation_norm);
 			} else if (name == "table") {
-				sg->geom = new Table;
+				sg->geom = new Table(vLocation_position, vLocation_norm);
 			}
 		}
 		sg->width = width;

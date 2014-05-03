@@ -29,6 +29,9 @@ void Mesh::create(unsigned int vLocation_position, unsigned int vLocation_norm, 
 	std::string type;
 	fin >> type;
 
+	Mesh::vLocation_position = vLocation_position;
+	Mesh::vLocation_norm = vLocation_norm;
+
 	if(type == "extrusion") 
 		buildExtrusion(vLocation_position, vLocation_norm, fin);
 	else if (type == "surfrev") {
@@ -38,8 +41,7 @@ void Mesh::create(unsigned int vLocation_position, unsigned int vLocation_norm, 
 
 void Mesh::buildExtrusion(unsigned int vLocation_position, unsigned int vLocation_norm, std::ifstream& fin) {
 	
-	int numPts;
-	float height; 
+	int numPts; 
 	fin >> height >> numPts;
 	numPts-=1;
 
@@ -271,9 +273,17 @@ void Mesh::draw(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorL
 
 	//m = m * tr * ro * sc;
 
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glEnableVertexAttribArray(vLocation_position); 
+	glVertexAttribPointer(vLocation_position, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_normal);
+
 	glm::vec3 color(0,1,0);
 	glUniform3fv(u_colorLocation, 1, &color[0]);
 	glUniformMatrix4fv(u_modelLocation, 1, GL_FALSE, &m[0][0]);
+	glEnableVertexAttribArray(vLocation_norm);
+	glVertexAttribPointer(vLocation_norm, 3, GL_FLOAT, GL_FALSE, 0,0);
 
 	glDrawArrays(GL_TRIANGLES, 0, pts.size());
 }

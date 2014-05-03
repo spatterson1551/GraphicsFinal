@@ -66,7 +66,8 @@ private:
 	std::vector<glm::vec4> pts;
 
 
-
+	unsigned int vLocation_position;
+	unsigned int vLocation_norm;
 	unsigned int vbo;
 	unsigned int ibo;
 	unsigned int vbo_normal;

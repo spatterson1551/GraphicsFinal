@@ -2,9 +2,29 @@
 #include "Cube.h"
 
 
-Chair::Chair(void)
+Chair::Chair(unsigned int, unsigned int)
 {
 	height = 2.0f;
+
+	Chair::vLocation_position = vLocation_position;
+	Chair::vLocation_norm = vLocation_norm;
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &vbo_norm);
+	glGenBuffers(1, &vbo_color);
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(vec3), Cube::cubeVerts, GL_STATIC_DRAW); //actually sends/connects the buffer to GPU
+	glEnableVertexAttribArray(vLocation_position);
+	glVertexAttribPointer(vLocation_position, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_color);
+	glBufferData(GL_ARRAY_BUFFER, 24*sizeof(vec3), Cube::vertColor, GL_STATIC_DRAW); //actually sends/connects the buffer to GPU
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_norm);
+	glBufferData(GL_ARRAY_BUFFER, 24*sizeof(vec3), Cube::cubeNorms, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36*sizeof(unsigned int), Cube::indices, GL_STATIC_DRAW);
 }
 
 
@@ -13,6 +33,13 @@ Chair::~Chair(void)
 }
 
 void Chair::draw(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation) {
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glEnableVertexAttribArray(vLocation_position);
+	glVertexAttribPointer(vLocation_position, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_color);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_norm);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 	glm::mat4 transform = glm::mat4(1.0f);
 

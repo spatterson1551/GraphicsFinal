@@ -62,7 +62,7 @@ private:
 	glm::vec4 light;
 	SceneGraph* sceneGraph;
 	Mesh mesh;
-	Box lightSource;
+	//Box lightSource;
 	std::string file;
 	float xAng;
 	float yAng;
