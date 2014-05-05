@@ -94,6 +94,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="intersectTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MyGLWidget.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="HEFace.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="GeneratedFiles\ui_program1.h" />
+    <ClInclude Include="intersectTest.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Vertex.h" />
     <CustomBuild Include="MyGLWidget.h">
