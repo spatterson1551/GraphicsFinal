@@ -16,6 +16,9 @@ MyGLWidget::MyGLWidget(QWidget* parent) : QGLWidget(parent) {
 	z = 0;
 	light= glm::vec4(.0f, 4.0f, 0.0f, 1.0f);
 	file = "CustomScene.txt";
+	deltaX = 0.0f;
+	deltaZ = 0.0f;
+	whichNode = 1;
 }
 
 MyGLWidget::~MyGLWidget() {
@@ -113,7 +116,9 @@ void MyGLWidget::paintGL() {
 	glUniform4fv(u_lightLocation, 1, &temp[0]);
 	glUniformMatrix4fv(u_cameraPosition, 1, GL_FALSE, &camera[0][0]); //Added for Blinn-Phong shading
 	
-	sceneGraph->traverse(camera, u_modelLocation, u_colorLocation);
+	sceneGraph->traverse(camera, u_modelLocation, u_colorLocation, whichNode, 0, deltaX, deltaZ);
+	deltaX = 0.0f;
+	deltaZ = 0.0f;
 
 	glm::mat4 trans = glm::mat4(1.0f);
 	trans = glm::translate(trans, vec3(light));
@@ -236,6 +241,29 @@ void MyGLWidget::lightRight(void) {
 
 void MyGLWidget::getConfigText(void) {
 
+}
+
+void MyGLWidget::nextGeometry(void) {
+	whichNode += 1;
+	deltaX = 0.0f;
+	deltaZ = 0.0f;
+	update();
+}
+void MyGLWidget::objectLeft(void) {
+	deltaX -= 1.0f;
+	update();
+}
+void MyGLWidget::objectRight(void) {
+	deltaX += 1.0f;
+	update();
+}
+void MyGLWidget::objectIn(void) {
+	deltaZ -= 1.0f;
+	update();
+}
+void MyGLWidget::objectOut(void) {
+	deltaZ += 1.0f;
+	update();
 }
 
 void MyGLWidget::selectFile(void) {

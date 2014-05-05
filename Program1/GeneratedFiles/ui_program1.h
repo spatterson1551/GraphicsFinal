@@ -49,6 +49,13 @@ public:
     QDial *dial_2;
     QLabel *label;
     QLabel *label_2;
+    QGroupBox *groupBox_3;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QFrame *line_2;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QPushButton *pushButton_14;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -57,7 +64,7 @@ public:
     {
         if (Program1Class->objectName().isEmpty())
             Program1Class->setObjectName(QStringLiteral("Program1Class"));
-        Program1Class->resize(601, 590);
+        Program1Class->resize(601, 668);
         centralWidget = new QWidget(Program1Class);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         widget = new MyGLWidget(centralWidget);
@@ -121,6 +128,29 @@ public:
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(160, 20, 51, 41));
         label_2->setWordWrap(true);
+        groupBox_3 = new QGroupBox(centralWidget);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setGeometry(QRect(20, 540, 571, 71));
+        pushButton_2 = new QPushButton(groupBox_3);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(20, 30, 91, 23));
+        pushButton_3 = new QPushButton(groupBox_3);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(130, 10, 75, 23));
+        line_2 = new QFrame(groupBox_3);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setGeometry(QRect(110, 20, 20, 41));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+        pushButton_4 = new QPushButton(groupBox_3);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(130, 40, 75, 23));
+        pushButton_5 = new QPushButton(groupBox_3);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(210, 10, 75, 23));
+        pushButton_14 = new QPushButton(groupBox_3);
+        pushButton_14->setObjectName(QStringLiteral("pushButton_14"));
+        pushButton_14->setGeometry(QRect(210, 40, 75, 23));
         Program1Class->setCentralWidget(centralWidget);
         groupBox_2->raise();
         widget->raise();
@@ -128,6 +158,7 @@ public:
         pushButton_6->raise();
         pushButton_7->raise();
         groupBox->raise();
+        groupBox_3->raise();
         menuBar = new QMenuBar(Program1Class);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 601, 21));
@@ -151,6 +182,11 @@ public:
         QObject::connect(dial_2, SIGNAL(valueChanged(int)), widget, SLOT(camLeftRight(int)));
         QObject::connect(pushButton_12, SIGNAL(pressed()), widget, SLOT(lightUp()));
         QObject::connect(pushButton_13, SIGNAL(pressed()), widget, SLOT(lightDown()));
+        QObject::connect(pushButton_2, SIGNAL(clicked()), widget, SLOT(nextGeometry()));
+        QObject::connect(pushButton_3, SIGNAL(clicked()), widget, SLOT(objectLeft()));
+        QObject::connect(pushButton_4, SIGNAL(clicked()), widget, SLOT(objectIn()));
+        QObject::connect(pushButton_5, SIGNAL(clicked()), widget, SLOT(objectRight()));
+        QObject::connect(pushButton_14, SIGNAL(clicked()), widget, SLOT(objectOut()));
 
         QMetaObject::connectSlotsByName(Program1Class);
     } // setupUi
@@ -171,6 +207,12 @@ public:
         groupBox_2->setTitle(QApplication::translate("Program1Class", "CAMERA", 0));
         label->setText(QApplication::translate("Program1Class", "Up/Down", 0));
         label_2->setText(QApplication::translate("Program1Class", "Left/Right", 0));
+        groupBox_3->setTitle(QApplication::translate("Program1Class", "Scene Manipulation", 0));
+        pushButton_2->setText(QApplication::translate("Program1Class", "Next Geometry", 0));
+        pushButton_3->setText(QApplication::translate("Program1Class", "- X", 0));
+        pushButton_4->setText(QApplication::translate("Program1Class", "- Z", 0));
+        pushButton_5->setText(QApplication::translate("Program1Class", "+ X", 0));
+        pushButton_14->setText(QApplication::translate("Program1Class", "+ Z", 0));
     } // retranslateUi
 
 };

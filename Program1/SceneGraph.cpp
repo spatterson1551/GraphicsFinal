@@ -55,8 +55,12 @@ void SceneGraph::addChild(SceneGraph* sg, int idx_x, int idx_z) {
 	}
 }
 
-void SceneGraph::traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation) {
+void SceneGraph::traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation, int whichNode, int currentNode, float deltaX, float deltaZ) {
 
+	if (currentNode == whichNode) {
+		transX += deltaX;
+		transZ += deltaZ;
+	}
 
 	glm::mat4 tr = glm::translate(glm::mat4(1.0f), vec3(transX, transY, transZ));
 	glm::mat4 sc = glm::scale(glm::mat4(1.0f), vec3(scaleX, scaleY, scaleZ));
@@ -70,7 +74,7 @@ void SceneGraph::traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned in
 
 	for(int i = 0; i < width * depth; i++) {
 		if(children[i]) {
-			children[i]->traverse(m, u_modelLocation, u_colorLocation);
+			children[i]->traverse(m, u_modelLocation, u_colorLocation, whichNode, currentNode+1, deltaX, deltaZ);
 		}
 	}
 }

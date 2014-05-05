@@ -15,7 +15,7 @@ public:
 	SceneGraph(int, int);
 	//SceneGraph(std::string file);
 	~SceneGraph(void);
-	void traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation);
+	void traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation, int whichNode, int currentNode, float deltaX, float deltaZ);
 	void addChild(SceneGraph* sg, int idx_x, int idx_z);
 	//SceneGraph* operator=(SceneGraph* rSide);
 	/*void setTransX(int tx) { transX = tx; }

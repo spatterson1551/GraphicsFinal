@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>590</height>
+    <height>668</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -250,12 +250,104 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>540</y>
+      <width>571</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Scene Manipulation</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Next Geometry</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>10</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>- X</string>
+     </property>
+    </widget>
+    <widget class="Line" name="line_2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>20</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>40</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>- Z</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+ X</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_14">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>40</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+ Z</string>
+     </property>
+    </widget>
+   </widget>
    <zorder>groupBox_2</zorder>
    <zorder>widget</zorder>
    <zorder>pushButton</zorder>
    <zorder>pushButton_6</zorder>
    <zorder>pushButton_7</zorder>
    <zorder>groupBox</zorder>
+   <zorder>groupBox_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -300,6 +392,11 @@
     <slot>camLeftRight(int)</slot>
     <slot>lightUp()</slot>
     <slot>lightDown()</slot>
+    <slot>nextGeometry()</slot>
+    <slot>objectLeft()</slot>
+    <slot>objectIn()</slot>
+    <slot>objectRight()</slot>
+    <slot>objectOut()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -459,7 +556,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>204</x>
-     <y>517</y>
+     <y>515</y>
     </hint>
     <hint type="destinationlabel">
      <x>175</x>
@@ -480,6 +577,86 @@
     <hint type="destinationlabel">
      <x>247</x>
      <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>nextGeometry()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>612</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>objectLeft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>592</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>224</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>objectIn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>197</x>
+     <y>624</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>355</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>objectRight()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>588</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_14</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>objectOut()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>619</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>348</y>
     </hint>
    </hints>
   </connection>

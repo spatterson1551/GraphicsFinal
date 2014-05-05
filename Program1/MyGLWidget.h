@@ -68,6 +68,9 @@ private:
 	float yAng;
 	float zAng;
 	float z;
+	float deltaX;
+	float deltaZ;
+	int whichNode;
 
 public slots:
 	void cameraZoom(void);
@@ -86,4 +89,9 @@ public slots:
 	void lightRight(void);
 	void getConfigText(void);
 	void selectFile(void);
+	void nextGeometry(void);
+	void objectLeft(void);
+	void objectRight(void);
+	void objectIn(void);
+	void objectOut(void);
 };
