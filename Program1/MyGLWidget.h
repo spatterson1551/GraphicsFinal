@@ -71,6 +71,7 @@ private:
 	float deltaX;
 	float deltaZ;
 	int whichNode;
+	int numNodes;
 
 public slots:
 	void cameraZoom(void);

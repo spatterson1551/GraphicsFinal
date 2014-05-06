@@ -19,6 +19,7 @@ MyGLWidget::MyGLWidget(QWidget* parent) : QGLWidget(parent) {
 	deltaX = 0.0f;
 	deltaZ = 0.0f;
 	whichNode = 1;
+	numNodes = 0;
 }
 
 MyGLWidget::~MyGLWidget() {
@@ -81,9 +82,7 @@ void MyGLWidget::initializeGL() {
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36*sizeof(unsigned int), Cube::indices, GL_STATIC_DRAW);
-
-
-	
+		
 	glEnableVertexAttribArray(vLocation_color);
 	glEnableVertexAttribArray(vLocation_norm);
 	glVertexAttribPointer(vLocation_color, 3, GL_FLOAT, GL_FALSE, 0, 0); 
@@ -245,6 +244,9 @@ void MyGLWidget::getConfigText(void) {
 
 void MyGLWidget::nextGeometry(void) {
 	whichNode += 1;
+	if(whichNode > numNodes) {
+		whichNode = 1;
+	}
 	deltaX = 0.0f;
 	deltaZ = 0.0f;
 	update();
@@ -301,7 +303,7 @@ void MyGLWidget::sgConfigFile() {
 	sceneGraph->scaleZ = 1.0f;//depth;
 	sceneGraph->rotY = 0.0f;
 	// end floor
-	
+	numNodes = 1;
 	SceneGraph *sg;
 
 	//now loop through num times and create all of the nodes
@@ -339,6 +341,7 @@ void MyGLWidget::sgConfigFile() {
 		sg->width = width;
 		sg->depth = depth;
 		sceneGraph->addChild(sg, sg->transX, sg->transZ);
+		numNodes++;
 		delete sg;
 	}
 	// end loop
