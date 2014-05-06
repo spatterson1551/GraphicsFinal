@@ -52,6 +52,7 @@ public:
 
 	bool isConvex(std::vector<Point>, int);
 	void draw(glm::mat4, unsigned int, unsigned int);
+	void draw(glm::mat4, unsigned int, unsigned int, glm::vec3);
 
 	~Mesh(void);
 
