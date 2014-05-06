@@ -1,7 +1,12 @@
-5 5 1
+5 5 2
 
 mesh 
-cubeExtrusion.dat 0 
+surfrev2.dat 0 
+1 1
+0
+1 1 1
+
+box
 1 1
 0
 1 1 1

@@ -103,6 +103,7 @@ void Mesh::buildSurfRev(unsigned int vLocation_position, unsigned int vLocation_
 		fin >> y;
 		basePts.push_back(Point(x, y, 0));
 	}
+	height = basePts[basePts.size()-1].y+1;
 
 	//if pts dont lie on y axis
 	if(basePts[0].x != 0.0f) {
