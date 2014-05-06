@@ -9,7 +9,7 @@ using namespace glm;
 
 void raycast();
 
-
+vec4 intersectTest(vec4 ray);
 
 
 

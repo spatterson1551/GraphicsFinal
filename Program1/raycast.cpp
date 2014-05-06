@@ -53,7 +53,7 @@ vec4 intersectTest(vec4 ray) {
 	//mesh
 
 
-
+	return vec4(0, 0, 0, 0);
 
 
 
