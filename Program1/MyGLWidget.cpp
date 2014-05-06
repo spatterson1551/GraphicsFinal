@@ -15,10 +15,16 @@ MyGLWidget::MyGLWidget(QWidget* parent) : QGLWidget(parent) {
 	zAng = 0;
 	z = 0;
 	light= glm::vec4(.0f, 4.0f, 0.0f, 1.0f);
-	file = "CustomScene.txt";
-	deltaX = 0.0f;
-	deltaZ = 0.0f;
+	file = "CatmullTest.txt";
+	transforms.deltaX = 0.0f;
+	transforms.deltaZ = 0.0f;
+	transforms.deltaY = 0.0f;
+	transforms.scaleX = 0.0f;
+	transforms.scaleY = 0.0f;
+	transforms.scaleZ = 0.0f;
+	transforms.rotY = 0.0f;
 	whichNode = 1;
+	MyGLWidget::divide = false;
 }
 
 MyGLWidget::~MyGLWidget() {
@@ -114,11 +120,18 @@ void MyGLWidget::paintGL() {
 	
 	glm::vec4 temp = camera * light;
 	glUniform4fv(u_lightLocation, 1, &temp[0]);
-	glUniformMatrix4fv(u_cameraPosition, 1, GL_FALSE, &camera[0][0]); //Added for Blinn-Phong shading
+	//glUniformMatrix4fv(u_cameraPosition, 1, GL_FALSE, &camera[0][0]); //Added for Blinn-Phong shading
+	glUniform4fv(u_cameraPosition, 1, &camera[0][0]);
 	
-	sceneGraph->traverse(camera, u_modelLocation, u_colorLocation, whichNode, 0, deltaX, deltaZ);
-	deltaX = 0.0f;
-	deltaZ = 0.0f;
+	sceneGraph->traverse(camera, u_modelLocation, u_colorLocation, whichNode, 0, transforms, divide);
+	transforms.deltaX = 0.0f;
+	transforms.deltaZ = 0.0f;
+	transforms.deltaY = 0.0f;
+	transforms.scaleX = 0.0f;
+	transforms.scaleY = 0.0f;
+	transforms.scaleZ = 0.0f;
+	transforms.rotY = 0.0f;
+	divide = false;
 
 	glm::mat4 trans = glm::mat4(1.0f);
 	trans = glm::translate(trans, vec3(light));
@@ -245,24 +258,76 @@ void MyGLWidget::getConfigText(void) {
 
 void MyGLWidget::nextGeometry(void) {
 	whichNode += 1;
-	deltaX = 0.0f;
-	deltaZ = 0.0f;
+	transforms.deltaX = 0.0f;
+	transforms.deltaZ = 0.0f;
+	transforms.deltaY = 0.0f;
+	transforms.scaleX = 0.0f;
+	transforms.scaleY = 0.0f;
+	transforms.scaleZ = 0.0f;
+	transforms.rotY = 0.0f;
 	update();
 }
 void MyGLWidget::objectLeft(void) {
-	deltaX -= 1.0f;
+	transforms.deltaX -= .1f;
 	update();
 }
 void MyGLWidget::objectRight(void) {
-	deltaX += 1.0f;
+	transforms.deltaX += .1f;
 	update();
 }
 void MyGLWidget::objectIn(void) {
-	deltaZ -= 1.0f;
+	transforms.deltaZ -= .1f;
 	update();
 }
 void MyGLWidget::objectOut(void) {
-	deltaZ += 1.0f;
+	transforms.deltaZ += .1f;
+	update();
+}
+
+void MyGLWidget::objectUp(void) {
+	transforms.deltaY += .1f;
+	update();
+}
+void MyGLWidget::objectDown(void) {
+	transforms.deltaY -= .1f;
+	update();
+}
+void MyGLWidget::rotateCW(void) {
+	transforms.rotY += 2.0f;
+	update();
+}
+void MyGLWidget::rotateCCW(void) {
+	transforms.rotY -= 2.0f;
+	update();
+}
+void MyGLWidget::scaleUpX(void) {
+	transforms.scaleX += 0.05f;
+	update();
+}
+void MyGLWidget::scaleDownX(void) {
+	transforms.scaleX -= 0.05f;
+	update();
+}
+void MyGLWidget::scaleUpY(void) {
+	transforms.scaleY += 0.05f;
+	update();
+}
+void MyGLWidget::scaleDownY(void) {
+	transforms.scaleX -= 0.05f;
+	update();
+}
+void MyGLWidget::scaleUpZ(void) {
+	transforms.scaleZ += 0.05f;
+	update();
+}
+void MyGLWidget::scaleDownZ(void) {
+	transforms.scaleZ -= 0.05f;
+	update();
+}
+
+void MyGLWidget::subDivide(void) {
+
+	divide = true;
 	update();
 }
 

@@ -17,8 +17,10 @@
 #include <floor.h>
 #include <box.h>
 #include <Cube.h>
+#include <Transformations.h>
 
 using glm::vec3;
+
 
 class MyGLWidget : public QGLWidget
 {
@@ -68,9 +70,9 @@ private:
 	float yAng;
 	float zAng;
 	float z;
-	float deltaX;
-	float deltaZ;
+	Transformations transforms;
 	int whichNode;
+	bool divide;
 
 public slots:
 	void cameraZoom(void);
@@ -94,4 +96,15 @@ public slots:
 	void objectRight(void);
 	void objectIn(void);
 	void objectOut(void);
+	void objectUp(void);
+	void objectDown(void);
+	void rotateCW(void);
+	void rotateCCW(void);
+	void scaleUpX(void);
+	void scaleDownX(void);
+	void scaleUpY(void);
+	void scaleDownY(void);
+	void scaleUpZ(void);
+	void scaleDownZ(void);
+	void subDivide(void);
 };

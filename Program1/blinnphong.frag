@@ -21,9 +21,10 @@ void main() {
 	vec3 V = normalize(camPosition - fs_position);
 	vec3 H = normalize(fs_light + V);
 
-	float spec = pow(max(0.0, dot(H, fs_normal)), specPower) * 10;
+	float spec = pow(max(0.0, dot(H, fs_normal)), specPower);
 	//out_Color += spec*fs_color;
 	//out_Color += spec*vec4(fs_color.x, fs_color.y, fs_color.z, 0.0)*100;
+	out_Color += spec*vec4(1, 1, 1, 1)*100;
 
 	if(out_Color.x > 1.0)
 		out_Color.x = 1.0;

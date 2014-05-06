@@ -16,7 +16,10 @@ struct HEFace {
 		edge = e;
 		normal = n;
 	}
+	HEFace::~HEFace() {
+		edge = NULL;
 
+	}
 	/*Face::Face(Face f) {
 		vert1 = f.vert1;
 		vert2 = f.vert2;

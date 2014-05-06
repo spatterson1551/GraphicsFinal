@@ -10,6 +10,7 @@ public:
 
 	//static void draw(glm::mat4 m, unsigned int u_modelLocation, float floorX, float floorZ);
 	void draw(glm::mat4 m, unsigned int, unsigned int);
+	void catmullClark() { return; }
 	float width;
 	float depth;
 	unsigned int vLocation_position;

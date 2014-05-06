@@ -17,6 +17,7 @@ public:
 	~Box(void);
 
 	void draw(glm::mat4 m, unsigned int, unsigned int);
+	void catmullClark() { return; }
 	static vec3 cubeVerts[24];
 	static vec3 vertColor[24];
 	static unsigned int indices[36];

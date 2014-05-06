@@ -49,8 +49,11 @@ public:
 
 	int vertExists (Point p);
 	int edgeExists (Point p1, Point p2);
+	int getFaceIndex(HEFace* f);
 
 	bool isConvex(std::vector<Point>, int);
+
+	void catmullClark();
 	void draw(glm::mat4, unsigned int, unsigned int);
 
 	~Mesh(void);
@@ -64,6 +67,7 @@ private:
 	std::vector<Point> basePts;
 	std::vector<Point> topPts;
 	std::vector<glm::vec4> pts;
+	std::vector<Point> centroids;
 
 
 	unsigned int vLocation_position;

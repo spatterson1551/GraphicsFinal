@@ -14,6 +14,12 @@ struct Point{
 		Point::y = y;
 		Point::z = z;
 	}
+	bool friend operator==(Point left, Point right) {
+		if (left.x == right.x && left.y == right.y && left.z == right.z) {
+			return true;
+		} 
+		return false;
+	}
 	//bool operator==(Point& p) {
 	//	if (x == p.x && y == p.y && z == p.z) {
 	//		return true;

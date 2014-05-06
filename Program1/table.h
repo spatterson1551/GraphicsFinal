@@ -9,7 +9,7 @@ public:
 	~Table(void);
 
 	void draw(glm::mat4 m, unsigned int, unsigned int);
-
+	void catmullClark() { return; }
 	unsigned int vLocation_position;
 	unsigned int vLocation_norm;
 	unsigned int vbo;

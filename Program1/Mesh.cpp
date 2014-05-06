@@ -3,7 +3,7 @@
 
 Mesh::Mesh(void)
 {
-
+	type = 'm';
 }
 //
 //Mesh::Mesh(unsigned int vLocation_position, unsigned int vLocation_norm)
@@ -14,6 +14,7 @@ Mesh::Mesh(void)
 Mesh::Mesh(std::string fileName, unsigned int vLocation_position, unsigned int vLocation_norm) {
 
 	create(vLocation_position, vLocation_norm, fileName);
+	type = 'm';
 }
 
 Mesh::~Mesh(void)
@@ -263,6 +264,116 @@ bool Mesh::isConvex(std::vector<Point> points, int numPts) {
 	}
 
 	return true;
+}
+
+int Mesh::getFaceIndex(HEFace* f) {
+	for (int i = 0; i < faces.size(); i++) {
+		if (faces[i] == f) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+void Mesh::catmullClark() {
+
+	//calculate centroids
+	for (int i = 0; i < faces.size(); i++) {
+		Edge* original = faces[i]->edge;
+		Edge* current = faces[i]->edge;
+		int count = 1;
+		float x = current->vert->pt.x;
+		float y = current->vert->pt.y;
+		float z = current->vert->pt.z;
+		while (current->next != original) {
+			count++;
+			current = current->next;
+			x += current->vert->pt.x;
+			y += current->vert->pt.y;
+			z += current->vert->pt.z;
+		}
+		centroids.push_back(Point(x/count, y/count, z/count));
+	}
+	//divide up the half edges
+	int limit = edges.size();
+	for (int i = 0; i < limit; i++) {
+		//assume face indices is j and k
+		int j = getFaceIndex(edges[i]->face);
+		int k = getFaceIndex(edges[i]->pair->face);
+		Point p;
+		p.x = (edges[i]->extFrom.x + edges[i]->vert->pt.x + centroids[j].x + centroids[k].x)/4.0f;
+		p.y = (edges[i]->extFrom.y + edges[i]->vert->pt.y + centroids[j].y + centroids[k].y)/4.0f;
+		p.z = (edges[i]->extFrom.z + edges[i]->vert->pt.z + centroids[j].z + centroids[k].z)/4.0f;
+		//break up the existing 2 half edges, create 2 new half edges
+		int e1i = edgeExists(edges[i]->extFrom, edges[i]->vert->pt);
+		int v1i = vertExists(p);
+		if (v1i == -1) { //doesnt exist
+			verts.push_back(new Vertex(p, NULL)); //shouldnt do if already created
+			v1i = verts.size()-1;
+		}
+		edges.push_back(new Edge(NULL, edges[i]->next, NULL, edges[i]->vert, p));
+		edges[i]->vert = verts[v1i];
+		edges[i]->face = NULL;
+		edges[i]->pair = NULL;
+		//edges[i]->next = edges[edges.size()-1];
+		if (verts[v1i]->edge == NULL) {
+			verts[v1i]->edge = edges[edges.size()-1]; //shouldnt do if already created
+		}
+		int v2i = vertExists(centroids[j]);
+		if (v2i == -1) { //doesnt exist
+			verts.push_back(new Vertex(p, NULL));
+			v2i = verts.size()-1;
+		}
+		edges.push_back(new Edge(NULL, NULL, NULL, verts[v2i], p));
+		edges.push_back(new Edge(NULL, NULL, NULL, verts[v1i], verts[v2i]->pt));
+		edges[edges.size()-1]->pair = edges[edges.size()-2];
+		edges[edges.size()-2]->pair = edges[edges.size()-1];
+		if (verts[v2i]->edge == NULL) {
+			verts[v2i]->edge = edges[edges.size()-1];
+		}
+		edges[i]->next = edges[edges.size()-2];
+		edges[edges.size()-1]->next = edges[edges.size()-3];
+	}
+	//set up pairs
+	for (int i = 0; i < edges.size(); i++) {
+		if (edges[i]->pair == NULL) {
+			int ei = edgeExists(edges[i]->vert->pt, edges[i]->extFrom);
+			edges[i]->pair = edges[ei];
+			edges[ei]->pair = edges[i];
+		}
+	}
+	//finish setting the next's
+	for (int i = 0; i < edges.size(); i++) {
+		if (edges[i]->next == NULL) {
+			for (int j = 0; j < edges.size(); j++) {
+				if (edges[j]->extFrom == edges[j]->pair->vert->pt) {
+					edges[i]->next = edges[j];
+				}
+			}
+		}
+	}
+	//create all of the new faces
+	for (int i = 0; i < faces.size(); i++) {
+		delete faces[i];
+	}
+	faces.clear();
+	for (int i = 0; i < edges.size(); i++) {
+		if (edges[i]->face == NULL) {
+			Edge* original = edges[i];
+			Edge* e = edges[i];
+			faces.push_back(new HEFace(edges[i], glm::vec3(0, 0, 0)));
+			while (e != original) {
+				if (e->face == NULL) {
+					e->face = faces[faces.size()-1];
+				}
+				e = e->next;
+			}
+		}
+	}
+	int i = 0;
+	i++;
+	setPtsAndNormals();
+
 }
 
 void Mesh::draw(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation) {
