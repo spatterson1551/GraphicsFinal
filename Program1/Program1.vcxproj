@@ -74,6 +74,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Chair.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="EasyBMP.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_MyGLWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -94,11 +95,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="intersectTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MyGLWidget.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="program1.cpp" />
+    <ClCompile Include="raycast.cpp" />
     <ClCompile Include="SceneGraph.cpp" />
     <ClCompile Include="Table.cpp" />
   </ItemGroup>
@@ -131,12 +134,18 @@
     <ClInclude Include="box.h" />
     <ClInclude Include="chair.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="EasyBMP.h" />
+    <ClInclude Include="EasyBMP_BMP.h" />
+    <ClInclude Include="EasyBMP_DataStructures.h" />
+    <ClInclude Include="EasyBMP_VariousBMPutilities.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="HEFace.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="GeneratedFiles\ui_program1.h" />
+    <ClInclude Include="intersectTest.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Transformations.h" />
+    <ClInclude Include="raycast.h" />
     <ClInclude Include="Vertex.h" />
     <CustomBuild Include="MyGLWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>

@@ -37,7 +37,7 @@ void SceneGraph::addChild(SceneGraph* sg, int idx_x, int idx_z) {
 	}
 	else {
 		//sg->setTransX(idx_x + 0.5f);
- 		//sg->setTransZ(idx_z + 0.5f);
+		//sg->setTransZ(idx_z + 0.5f);
 		sg->transX = idx_x;// + 0.05f;
 		sg->transZ = idx_z;// + 0.05f;
 		//children[idx_x * depth + idx_z] = sg;
@@ -78,7 +78,12 @@ void SceneGraph::traverse(glm::mat4 m, unsigned int u_modelLocation, unsigned in
 	m = m * tr * ro * sc;
 
 	if(geom) {
-		geom->draw(m, u_modelLocation, u_colorLocation);
+		if (currentNode == whichNode) {
+			geom->draw(m, u_modelLocation, u_colorLocation, vec3(1,1,1));
+		}
+		else {
+			geom->draw(m, u_modelLocation, u_colorLocation);
+		}
 	}
 
 	for(int i = 0; i < width * depth; i++) {

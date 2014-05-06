@@ -9,6 +9,8 @@ public:
 
 	void draw(glm::mat4 m, unsigned int, unsigned int);
 	void catmullClark() { return; }
+	void draw(glm::mat4 m, unsigned int, unsigned int, vec3);
+
 	unsigned int vLocation_position;
 	unsigned int vLocation_norm;
 	unsigned int vbo;

@@ -73,6 +73,7 @@ private:
 	Transformations transforms;
 	int whichNode;
 	bool divide;
+	int numNodes;
 
 public slots:
 	void cameraZoom(void);

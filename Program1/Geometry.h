@@ -11,6 +11,7 @@ public:
 	//virtual float getHeight() { return height; }
 	virtual void draw(glm::mat4 m, unsigned int, unsigned int) = 0;
 	virtual void catmullClark() = 0;
+	virtual void draw(glm::mat4 m, unsigned int, unsigned int, glm::vec3) = 0;
 
 	float height;
 	char type;

@@ -399,6 +399,29 @@ void Mesh::draw(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorL
 	glDrawArrays(GL_TRIANGLES, 0, pts.size());
 }
 
+void Mesh::draw(glm::mat4 m, unsigned int u_modelLocation, unsigned int u_colorLocation, glm::vec3 color) {
+
+	//glm::mat4 tr = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	//glm::mat4 sc = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 4.0f, 2.0f));
+	//glm::mat4 ro = glm::rotate(glm::mat4(1.0f), 90.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+	//m = m * tr * ro * sc;
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glEnableVertexAttribArray(vLocation_position); 
+	glVertexAttribPointer(vLocation_position, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_normal);
+
+	glUniform3fv(u_colorLocation, 1, &color[0]);
+	glUniformMatrix4fv(u_modelLocation, 1, GL_FALSE, &m[0][0]);
+	glEnableVertexAttribArray(vLocation_norm);
+	glVertexAttribPointer(vLocation_norm, 3, GL_FLOAT, GL_FALSE, 0,0);
+
+	glDrawArrays(GL_TRIANGLES, 0, pts.size());
+}
+
+
 int Mesh::vertExists (Point p) {
 		for (int i = 0; i < verts.size(); i++) {
 			if (verts[i]->pt.x == p.x && verts[i]->pt.y == p.y && verts[i]->pt.z == p.z)
